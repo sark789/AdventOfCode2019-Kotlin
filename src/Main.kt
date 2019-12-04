@@ -1,3 +1,4 @@
+@file:Suppress("UNREACHABLE_CODE")
 
 import java.io.FileReader
 import kotlin.math.absoluteValue
@@ -5,7 +6,7 @@ import kotlin.math.absoluteValue
 const val PATH = "C:\\Users\\timpo\\OneDrive\\Namizje\\KotlinTutorial\\AdventOfCode\\src\\"
 
 fun main() {
-    crossedWires()
+    secureContainerPart2()
 }
 
 fun readFromFileAllLines(file: String): List<String> {
@@ -119,9 +120,6 @@ fun crossedWires(){
     println(list.min())
     }
 
-
-
-
 fun crossedAllPoints(data1: List<String>): MutableList<Pair<Int,Int>>{
 
     var pair1 = Pair(0,0)
@@ -158,4 +156,60 @@ fun crossedAllPoints(data1: List<String>): MutableList<Pair<Int,Int>>{
     }
     return list1
 }
+
+//4.
+fun secureContainer(){
+    val start = 146810
+    val end = 612564
+    var acc = 0
+    var list: ArrayList<Char> = arrayListOf()
+
+    for(x in start..end){
+        var stringVal = x.toString()
+        for(char in  stringVal){
+            list.add(char)
+        }
+        if(list[0] == list[1] || list[1] == list[2] || list[2] == list[3] || list[3] == list[4] || list[4] == list[5]){
+            if(list[0] <= list[1] && list[1] <= list[2] && list[2] <= list[3]
+                && list[3] <= list[4] && list[4] <= list[5]) acc++
+        }
+        list.clear()
+        }
+        println(acc)
+    }
+
+fun secureContainerPart2(){
+    val start = 146810
+    val end = 612564
+    var acc = 0
+    var list: ArrayList<Char> = arrayListOf()
+    var rez = 0
+
+    for(x in start..end){
+        var stringVal = x.toString()
+        var isOk = 1
+        for(char in  stringVal){
+            list.add(char)
+        }
+
+        if(list[0] == list[1] || list[1] == list[2] || list[2] == list[3] || list[3] == list[4] || list[4] == list[5]){
+                if (list[0] <= list[1] && list[1] <= list[2] && list[2] <= list[3]
+                    && list[3] <= list[4] && list[4] <= list[5]
+                )
+                {
+                    acc++
+                    for(z in 0..4){
+                        if(list[z] == list[z+1]){
+                            isOk++
+                        }
+                        else{if(isOk == 2) break else isOk = 1}
+                    }
+                    if(isOk == 2){rez++}
+                }
+        }
+        list.clear()
+    }
+    println(rez)
+}
+
 
